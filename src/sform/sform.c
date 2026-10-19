@@ -319,9 +319,9 @@ void SFORM_AUDIO_FUNC(unsigned int *ctx)
     float gate = st->trkGate, peak = st->trkPeak;
     /* Drone mix: Depth 0..50 brings the synth in over the full guitar,
      * 50..100 takes the guitar out (100 = synth only). */
-    float synG = 1.4f * depth;                   /* synth tops out at 0.7 (-3 dB) */
+    float synG = 2.0f * depth;
     float dryG = 2.0f - 2.0f * depth;
-    if (synG > 0.7f) synG = 0.7f;
+    if (synG > 1.0f) synG = 1.0f;
     if (dryG > 1.0f) dryG = 1.0f;
     uint32_t rng = st->rng;
     int i;
@@ -427,8 +427,11 @@ void SFORM_AUDIO_FUNC(unsigned int *ctx)
          * hysteresis, ~2 ms open / ~75 ms close); fixed-pitch modes drone on. */
         float gOpen = (envIn > 0.006f) ? 1.0f : ((envIn < 0.003f) ? 0.0f : ((gate > 0.5f) ? 1.0f : 0.0f));
         gate += ((gOpen > gate) ? 0.01f : 0.0003f) * (gOpen - gate);
-        float sg = 1.0f + track * (gate - 1.0f);
-        float drone = dryG * inL + synG * sg * dcY;
+        /* Synth at a fixed ~-30 dBFS, set by ear against a clean DI guitar
+         * (full scale, right for the XDuck link, screamed as a sound); in the
+         * "in" modes it is gated by the guitar. */
+        float amp = 0.03f * (1.0f + track * (gate - 1.0f));
+        float drone = dryG * inL + synG * amp * dcY;
 
         if (outUi < 0.5f) {                                                     /* XDuck */
             fxBuf[i + 8] = (i & 1) ? -depth * sm2 : depth * sm;

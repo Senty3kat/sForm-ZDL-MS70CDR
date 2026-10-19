@@ -5,7 +5,7 @@
   "gid_comment": "0x01 = Dynamics category -> SONAME prefix ZDL_DYN_ (user's request 2026-10-19; was 0x08 Delay).",
   "fxid": 502,
   "fxid_comment": "0x1f6. Changed 2026-10-19 (was 488, which collides with matujuice's Choral/EuGate). Free in stock, themanro dist and matujuice dist.",
-  "fxid_version": "1.00",
+  "fxid_version": "1.02",
   "fxid_version_comment": "Bump on every pedal build. History: C:\\zoom\\zdlnew\\sForm_versions.txt.",
   "flags_byte": 1,
   "dsp_cost": 15.0,

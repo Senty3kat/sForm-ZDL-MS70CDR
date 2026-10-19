@@ -4,7 +4,7 @@
 
 ![sForm on the MS-70CDR screen](docs/screen.png)
 
-**Release 1.00.** Custom `.ZDL` effect for the **Zoom MS-70CDR** (firmware 2.10).
+**Release 1.02.** Custom `.ZDL` effect for the **Zoom MS-70CDR** (firmware 2.10).
 One oscillator with a shapeable waveform that does three jobs:
 
 - **a modulation source for [XDuck](https://github.com/Senty3kat/XDuck-ZDL-MS70CDR)** —
@@ -47,6 +47,7 @@ One value box at the bottom left showing the first knob of the current page; on 
 
 ### Pitch tracking (Note = `in…`)
 
+- The synth plays at a fixed, quiet level (about a clean DI guitar at Depth 50).
 - Single notes, not chords. The synth sounds while the guitar sounds and stops when it stops
   (opens in ~2 ms, closes ~75 ms after silence); between notes it keeps the last pitch.
 - Pitch follows upward moves freely (hammer-ons, bends); it goes down only on a new, strong
