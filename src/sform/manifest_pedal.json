@@ -1,0 +1,70 @@
+{
+  "effect_name": "sForm",
+  "comment": "PEDAL BUILD manifest for sForm (9-knob). A shapeable LFO written into the R channel, made as the key source for XDuck (Route KeyR). L passes untouched. Place it right before XDuck, Out=Link, XDuck Route=sForm. Params arrive as UI*0.01 (LineSel clones), so every knob keeps max <= 100. One value box (page knob 1), so each page starts with the knob whose value matters most: Wave, Skew, Out.",
+  "gid": 1,
+  "gid_comment": "0x01 = Dynamics category -> SONAME prefix ZDL_DYN_ (user's request 2026-10-19; was 0x08 Delay).",
+  "fxid": 502,
+  "fxid_comment": "0x1f6. Changed 2026-10-19 (was 488, which collides with matujuice's Choral/EuGate). Free in stock, themanro dist and matujuice dist.",
+  "fxid_version": "1.00",
+  "fxid_version_comment": "Bump on every pedal build. History: C:\\zoom\\zdlnew\\sForm_versions.txt.",
+  "flags_byte": 1,
+  "dsp_cost": 15.0,
+  "params": [
+    {
+      "name": "Wave",
+      "max": 6,
+      "default": 0,
+      "comment": "Sine, Tri, SawUp, SawDn, Square (duty = Skew: 50 = square, else pulse), S&H (random steps), Drift (smooth random)."
+    },
+    {
+      "name": "Rate",
+      "max": 99,
+      "default": 9,
+      "comment": "Base rate 0.1 .. 10.0 Hz in 0.1 Hz steps (UI r -> 0.1*(r+1); default 9 = 1.0 Hz). The pedal shows Hz."
+    },
+    {
+      "name": "Mult",
+      "max": 12,
+      "default": 6,
+      "comment": "Rate multiplier x0.01 .. x100: .01 .02 .05 .1 .2 .5 1 2 5 10 20 50 100. Rate x Mult = 0.001 Hz .. 1 kHz."
+    },
+    {
+      "name": "Skew",
+      "max": 100,
+      "default": 50,
+      "comment": "Symmetry: where the peak of Sine/Tri/Saw sits in the cycle; duty cycle of Square (50 = square, lower/higher = pulse)."
+    },
+    {
+      "name": "Curve",
+      "max": 100,
+      "default": 50,
+      "comment": "Bend of the 0..1 shape: <50 log (bulging), 50 linear, >50 exponential (snappy)."
+    },
+    {
+      "name": "Smooth",
+      "max": 100,
+      "default": 0,
+      "comment": "Output smoothing 0 .. ~200 ms (rounds the corners of Square/Pulse/S&H)."
+    },
+    {
+      "name": "Out",
+      "max": 2,
+      "default": 0,
+      "comment": "XDuck (R carries the LFO and its 180-degree copy for XDuck Route=sForm/sFPan; L untouched), Drone (R = input/synth mix by Depth, L untouched), DrnSt (both outputs = input/synth mix by Depth)."
+    },
+    {
+      "name": "Depth",
+      "max": 100,
+      "default": 100,
+      "comment": "Out=XDuck: LFO depth 0..1. Drone / DrnSt: mix, 0 = guitar only, 50 = guitar and synth both at full level, 100 = synth only."
+    },
+    {
+      "name": "Note",
+      "max": 101,
+      "default": 0,
+      "comment": "Off = Rate x Mult. C0..A7 = the oscillator runs at that note (A4 = 440 Hz), Rate and Mult ignored. in-48, in-36, in-24, in-12, in, in+12, in+24 = the pitch tracked from IN L, shifted by octaves, held while the input is silent. max 101 is the largest proven: 0.16 with max 103 failed to install (FS.bin size mismatch). The DSP reads this knob as raw*100 (101 arrives as 1.01)."
+    }
+  ],
+  "audio_func_name": "Fx_DYN_sForm",
+  "audio_nop": false
+}
